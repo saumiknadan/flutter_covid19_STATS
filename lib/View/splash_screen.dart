@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     void dispose() {
       super.dispose();
+      _controller.dispose();
     }
 
     Timer(
@@ -34,10 +35,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Covid19 Rest API'),
-      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
