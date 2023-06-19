@@ -47,7 +47,7 @@ class _WorldStatScreenState extends State<WorldStatScreen>
                   future: statsServices.fetchWorldStatsRecords(),
                   builder: (context, AsyncSnapshot<WorldStatsModel> snapshot) {
             
-                    if (snapshot.hasData) {
+                    if (!snapshot.hasData) {
                       return Container(
                       // height: MediaQuery.of(context).size.height * 0.5, // Set your desired height
                       child: SpinKitFadingCircle(
@@ -61,9 +61,9 @@ class _WorldStatScreenState extends State<WorldStatScreen>
                         children: [
                           PieChart(
                             dataMap: {
-                              "Total": double.parse(snapshot.data.toString()),
-                              // "Recovered": double.parse(snapshot.data!.recovered.toString()),
-                              // "Death": double.parse(snapshot.data!.deaths.toString()),
+                              "Total": double.parse(snapshot.data!.cases.toString()),
+                              "Recovered": double.parse(snapshot.data!.recovered.toString()),
+                              "Death": double.parse(snapshot.data!.deaths.toString()),
                             },
                             chartRadius: MediaQuery.of(context).size.width / 3.2,
                             legendOptions: const LegendOptions(
@@ -71,6 +71,14 @@ class _WorldStatScreenState extends State<WorldStatScreen>
                             animationDuration: const Duration(milliseconds: 1200),
                             chartType: ChartType.ring,
                             colorList: colorlist,
+
+                            chartValuesOptions: const ChartValuesOptions(
+                          
+                            showChartValuesInPercentage: true,
+                          
+                          ),
+                          
+                          
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(
@@ -79,9 +87,9 @@ class _WorldStatScreenState extends State<WorldStatScreen>
                             child: Card(
                               child: Column(
                                 children: [
-                                  ReusableRow(title: 'Total', value: '200'),
-                                  ReusableRow(title: 'Total', value: '200'),
-                                  ReusableRow(title: 'Total', value: '200'),
+                                  ReusableRow(title: 'Total', value: snapshot.data!.cases.toString()),
+                                  ReusableRow(title: 'Death', value: snapshot.data!.deaths.toString()),
+                                  ReusableRow(title: 'Recovered', value: snapshot.data!.recovered.toString()),
                                 ],
                               ),
                             ),

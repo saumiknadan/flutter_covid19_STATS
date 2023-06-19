@@ -8,7 +8,7 @@ class StatsServices {
   Future<WorldStatsModel> fetchWorldStatsRecords() async {
     final response = await http.get(Uri.parse(AppUrl.worldStatesApi));
 
-    if (response == 200) {
+    if (response.statusCode == 200) {
       
       var data = jsonDecode(response.body);
       return WorldStatsModel.fromJson(data);
