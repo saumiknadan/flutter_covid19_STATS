@@ -1,6 +1,6 @@
 import 'package:covid_19_stat_flutter/View/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'dart:ffi';
+
 
 
 void main() {
